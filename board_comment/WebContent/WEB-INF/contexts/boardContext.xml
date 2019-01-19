@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- Dao -->
+<bean id="boardDao" class="board.dao.BoardDaoImpl" p:sqlSession-ref="sqlSessionTemplate"/>
+
+<!-- Model -->
+<bean id="boardPaging" class="board.model.Paging"/>
+
+<!-- Controller -->
+
+<!-- List 화면 -->
+<bean id="BoardListController" class="board.controller.ListController"
+p:boardListService-ref="boardListService" p:boardPaging-ref="boardPaging"/>
+
+<!-- 글쓰기 화면 -->
+<bean id="BoardWriteController" class="board.controller.WriteController"
+p:writeService-ref="writeService"/>
+
+<!-- 글보기 화면 -->
+<bean id="BoardGetArticleController" class="board.controller.GetArticleController"
+p:getArticleService-ref="getArticleService" p:commentListImpl-ref="CommentListImpl" p:commentWriteImpl-ref="CommentWriteImpl"/>
+<!-- 글 수정 -->
+<bean id="BoardUpdateArticleController" class="board.controller.UpdateArticleController"
+p:updateArticleService-ref="updateArticleService"/>
+
+<!--  글 삭제 -->
+<bean id="BoardDeleteArticleController" class="board.controller.DeleteArticleController"
+p:deleteArticleService-ref="deleteArticleService"/>
+
+<!-- Service -->
+<bean id="boardListService" class="board.service.BoardListServiceImpl"
+p:boardDao-ref="boardDao"/>
+<bean id="writeService" class="board.service.WriteServiceImpl"
+p:boardDao-ref="boardDao"/>
+<bean id="getArticleService" class="board.service.GetArticleServiceImpl"
+p:boardDao-ref="boardDao"/>
+<bean id="updateArticleService" class="board.service.UpdateArticleServiceImpl"
+p:boardDao-ref="boardDao"/>
+<bean id="deleteArticleService" class="board.service.DeleteArticleServiceImpl"
+p:boardDao-ref="boardDao"/>
+
+</beans>

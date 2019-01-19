@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- Dao -->
+<bean id="mybatisCommentDao" class="comment.dao.MybatisCommentDao"
+p:sqlSession-ref="sqlSessionTemplate"/>
+<!-- Controller -->
+<bean id="CommentListController" class="comment.controller.CommentListController"
+p:commentListImpl-ref="CommentListImpl"/>
+<bean id="CommentWriteController" class="comment.controller.CommentWriteController"
+p:commentWriteImpl-ref="CommentWriteImpl"/>
+<bean id="CommentDeleteController" class="comment.controller.CommentDeleteController"
+p:commentDeleteImpl-ref="CommentDeleteImpl"/>
+<!-- Service -->
+<bean id="CommentListImpl" class="comment.service.CommentListImpl"
+p:commentDao-ref="mybatisCommentDao"/>
+<bean id="CommentWriteImpl" class="comment.service.CommentWriteImpl"
+p:commentDao-ref="mybatisCommentDao"/>
+<bean id="CommentDeleteImpl" class="comment.service.CommentDeleteImpl"
+p:commentDao-ref="mybatisCommentDao"/>
+</beans>
